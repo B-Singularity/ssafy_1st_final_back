@@ -6,14 +6,10 @@ class SocialLoginRequestDto:
                 id_token,
                 email,
                 nickname_suggestion):
-        if provider.lower() != "google":
-            raise ValueError("현재 구글 소셜 로그인만 지원합니다.")
-        if not id_token:
-            raise ValueError("소셜 ID 토큰은 필수입니다.")
-        if not email:
-            raise ValueError("이메일 정보는 필수입니다.")
+        if not provider or not id_token or not email:
+            raise ValueError("provider, id_token, email은 필수입니다.")
         
-        self.provider = "google"
+        self.provider = provider
         self.id_token = id_token
         self.email = email
         self.nickname_suggestion = nickname_suggestion

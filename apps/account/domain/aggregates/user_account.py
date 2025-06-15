@@ -19,40 +19,19 @@ class UserAccount:
         self._last_login_at = last_login_at
     
 
-    @classmethod
-    def register_or_login(cls,
-                          account_id_generator,
-                          google_social_link,
-                          provided_email,
-                          initial_nickname,
-                          existing_account=None):
-        if existing_account:
-            existing_account.record_login(datetime.now())
-            return existing_account
-        else:
-            account_id = account_id_generator()
-            now = datetime.now()
+    def add_social_link(self, new_social_link):
+        if new_social_link not in self._social_links:
+            self._social_links.append(new_social_link)
 
-            user = cls(
-                account_id=account_id,
-                email=provided_email,
-                nickname=initial_nickname,
-                social_links=[google_social_link], 
-                created_at=now, 
-                last_login_at=now
-            )
-            return user
-    
-    def update_nickname(self, new_nickname, nickname_uniqueness_checker):
-        if self._nickname == new_nickname: 
+    def update_nickname(self, new_nickname, is_nickname_unique_checker):
+        if self._nickname == new_nickname:
             return
-        if not nickname_uniqueness_checker(new_nickname): 
+        if not is_nickname_unique_checker(new_nickname, self.account_id):
             raise ValueError(f"닉네임 '{new_nickname.name}'은 이미 사용 중입니다.")
         self._nickname = new_nickname
 
-    def record_login(self, login_time):
+    def record_login(self, login_time: datetime):
         self._last_login_at = login_time
-
     
     def __eq__(self, other):
         return isinstance(other, UserAccount) and self._account_id == other._account_id

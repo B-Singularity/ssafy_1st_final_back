@@ -204,3 +204,8 @@ CORS_ALLOWED_ORIGINS = [
 GOOGLE_CLIENT_ID = "24120708973-o7fr06vmr3qdhvf6h6mb6mjp3gfhttim.apps.googleusercontent.com"
 # 위 값은 예시이므로, 실제 Google Cloud Console에서 발급받은 정확한 클라이언트 ID로 교체해야 합니다.
 # 환경 변수로 관리하는 것을 권장합니다. (예: os.environ.get('GOOGLE_CLIENT_ID'))
+
+ACCOUNT_CONTAINER = "apps.account.containers.AccountContainer"
+INJECTOR_MODULES = [
+    "apps.account.interface.views",
+]
