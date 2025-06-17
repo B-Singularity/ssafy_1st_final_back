@@ -63,9 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 아래 중복된 미들웨어 항목들은 제거했습니다.
-    # 'corsheaders.middleware.CorsMiddleware', 
-    # 'django.middleware.security.SecurityMiddleware',
+    'apps.account.middleware.LoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'SsafyFinal.urls'
@@ -209,3 +207,41 @@ ACCOUNT_CONTAINER = "apps.account.containers.AccountContainer"
 INJECTOR_MODULES = [
     "apps.account.interface.views",
 ]
+
+# your_project/settings.py
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    # 포맷터: 로그를 어떤 형식으로 표현할지 정의
+    "formatters": {
+        # JSON 형식으로 로그를 출력하는 포맷터
+        "json": {
+            "()": "pythonjsonlogger.jsonlogger.JsonFormatter",
+            "format": "%(asctime)s %(levelname)s %(name)s %(module)s %(funcName)s %(lineno)d %(message)s",
+        },
+    },
+    # 핸들러: 로그를 실제로 어디에 보낼지 정의 (콘솔, 파일 등)
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler", # 로그를 콘솔(stdout)로 보냄
+            "formatter": "json", # 위에서 정의한 json 포맷터를 사용
+        },
+    },
+    # 로거: 어떤 로거가 어떤 핸들러를 사용할지, 어떤 레벨까지 처리할지 정의
+    "loggers": {
+        # 우리 앱의 로거
+        "apps.account": {
+            "handlers": ["console"],
+            "level": "DEBUG", # DEBUG 레벨 이상의 모든 로그를 처리
+            "propagate": False,
+        },
+        # Django 관련 로거
+        "django": {
+            "handlers": ["console"],
+            "level": "INFO", # INFO 레벨 이상의 로그만 처리
+            "propagate": False,
+        },
+    },
+}
