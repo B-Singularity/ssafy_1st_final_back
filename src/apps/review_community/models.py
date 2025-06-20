@@ -16,7 +16,7 @@ class CommentModel(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE, 
-        related_name="comments_by_author"
+        related_name="comments"
     )
     
     content = models.TextField(max_length=500) 

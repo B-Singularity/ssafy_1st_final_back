@@ -1,9 +1,9 @@
 from typing import Dict
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
-from apps.account.models import Users
+from src.apps.account.models import Users
 
-from apps.account.application.ports.auth_token import AuthTokenService
+from src.apps.account.application.ports.auth_token import AuthTokenService
 
 
 class SimpleJwtTokenService(AuthTokenService):

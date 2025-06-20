@@ -33,12 +33,12 @@ ALLOWED_HOSTS = [] # 프로덕션 환경에서는 실제 도메인/IP를 추가�
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.account.apps.AccountsConfig',
-    'apps.movie.apps.MoviesConfig',
-    'apps.content_management.apps.ContentManagementConfig',
-    'apps.notification.apps.NotificationConfig',
-    'apps.personalization.apps.PersonalizationConfig',
-    'apps.review_community.apps.ReviewCommunityConfig',
+    'src.apps.account.apps.AccountsConfig',
+    'src.apps.movie.apps.MoviesConfig',
+    'src.apps.content_management.apps.ContentManagementConfig',
+    'src.apps.notification.apps.NotificationConfig',
+    'src.apps.personalization.apps.PersonalizationConfig',
+    'src.apps.review_community.apps.ReviewCommunityConfig',
 
     'rest_framework',
     'rest_framework_simplejwt',
@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'account.Users' # 사용자 정의 User 모델 지정
+WSGI_APPLICATION = 'src.SsafyFinal.wsgi.application'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -64,10 +65,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'apps.account.middleware.LoggingMiddleware',
+    'src.apps.account.middleware.LoggingMiddleware',
 ]
 
-ROOT_URLCONF = 'SsafyFinal.urls'
+ROOT_URLCONF = 'src.SsafyFinal.urls'
 
 TEMPLATES = [
     {
@@ -85,7 +86,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SsafyFinal.wsgi.application'
+
 
 
 # Database
@@ -204,9 +205,9 @@ GOOGLE_CLIENT_ID = "24120708973-o7fr06vmr3qdhvf6h6mb6mjp3gfhttim.apps.googleuser
 # 위 값은 예시이므로, 실제 Google Cloud Console에서 발급받은 정확한 클라이언트 ID로 교체해야 합니다.
 # 환경 변수로 관리하는 것을 권장합니다. (예: os.environ.get('GOOGLE_CLIENT_ID'))
 
-ACCOUNT_CONTAINER = "apps.account.containers.AccountContainer"
+ACCOUNT_CONTAINER = "src.apps.account.containers.AccountContainer"
 INJECTOR_MODULES = [
-    "apps.account.interface.views",
+    "src.apps.account.interface.views",
 ]
 
 # your_project/settings.py
@@ -233,7 +234,7 @@ LOGGING = {
     # 로거: 어떤 로거가 어떤 핸들러를 사용할지, 어떤 레벨까지 처리할지 정의
     "loggers": {
         # 우리 앱의 로거
-        "apps.account": {
+        "src.apps.account": {
             "handlers": ["console"],
             "level": "DEBUG", # DEBUG 레벨 이상의 모든 로그를 처리
             "propagate": False,
