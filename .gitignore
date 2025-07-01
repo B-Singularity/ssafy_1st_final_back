@@ -19,3 +19,7 @@ pip-selfcheck.json
 # End of https://www.toptal.com/developers/gitignore/api/venv
 # SQLite
 *.sqlite3
+
+# Coverage report
+htmlcov/
+.coverage
