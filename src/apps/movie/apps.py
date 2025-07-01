@@ -3,4 +3,8 @@ from django.apps import AppConfig
 
 class MoviesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.movie'
+    name = 'src.apps.movie'
+    label = 'movie'
+
+    def ready(self):
+        pass

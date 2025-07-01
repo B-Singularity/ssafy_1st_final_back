@@ -1,10 +1,10 @@
 import pytest
 from datetime import datetime, timedelta
 
-from apps.account.domain.aggregates.user_account import UserAccount
-from apps.account.domain.value_objects.email import Email
-from apps.account.domain.value_objects.nickname import NickName
-from apps.account.domain.value_objects.social_link import SocialLink
+from src.apps.account.domain.aggregates.user_account import UserAccount
+from src.apps.account.domain.value_objects.email import Email
+from src.apps.account.domain.value_objects.nickname import NickName
+from src.apps.account.domain.value_objects.social_link import SocialLink
 
 @pytest.fixture
 def user_account():
